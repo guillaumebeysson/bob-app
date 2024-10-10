@@ -18,12 +18,13 @@ jobs:
     steps:
       # 1. Checkout du code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # 2. Configurer Java 11 pour le projet Spring Boot
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: '11'
 
       # 3. Build avec Maven

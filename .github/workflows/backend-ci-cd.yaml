@@ -27,15 +27,19 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      # 3. Build avec Maven
-      - name: Build with Maven
-        run: mvn clean install --file pom.xml
+      # 3. Compile with Maven
+      - name: Compile with Maven
+        run: mvn compile
       
-      # 4. Exécuter les tests et générer les rapports Jacoco
-      - name: Run tests with Maven
+      # 4. Tests with Maven
+      - name: Tests with Maven
         run: mvn test jacoco:report
 
-      # 5. Télécharger le rapport de couverture Jacoco en tant qu'artefact
+      # 5. Build avec Maven
+      - name: Build with Maven
+        run: mvn package -DskipTests=true
+
+      # 6. Télécharger le rapport de couverture Jacoco en tant qu'artefact
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:

@@ -30,18 +30,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4. Build du projet Angular
-      - name: Build Angular app
-        run: npm run build
-      
-      # 5. Exécuter les tests avec Karma et générer un rapport de couverture
+      # 4. Exécuter les tests avec Karma et générer un rapport de couverture
       - name: Run tests with Karma in CI mode
         run: |
           CI=true npm run test -- --browsers=ChromeHeadless --code-coverage --watch=false
 
-      # 6. Télécharger le rapport de couverture en tant qu'artefact
+      # 5. Télécharger le rapport de couverture en tant qu'artefact
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: front/coverage/bobapp
+
+      # 6. Build du projet Angular
+      - name: Build Angular app
+        run: npm run build
+

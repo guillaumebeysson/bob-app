@@ -1,0 +1,31 @@
+name: Spring Boot => Build only
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  Back-CI:
+    name: Spring Boot CI
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 'back'
+
+    steps:
+      # 1. Checkout du code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 2. Configurer Java 11 pour le projet Spring Boot
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+
+      # 3. Build avec Maven
+      - name: Build with Maven
+        run: mvn clean install --file pom.xml

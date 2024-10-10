@@ -1,0 +1,35 @@
+name: Angular => Build only
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  Frontend-CI:
+    name: Angular CI
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 'front'
+
+    steps:
+      # 1. Checkout du code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configurer Node.js
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3. Installer les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Build du projet Angular
+      - name: Build Angular app
+        run: npm run build

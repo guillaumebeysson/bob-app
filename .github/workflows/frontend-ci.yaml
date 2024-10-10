@@ -36,7 +36,7 @@ jobs:
       
       # 5. Exécuter les tests avec Karma et générer un rapport de couverture
       - name: Run tests with Karma in CI mode
-        run: npm run test -- --browsers=ChromeHeadless --single-run --code-coverage
+        run: npm run test -- --browsers=ChromeHeadless --code-coverage
 
       # 6. Télécharger le rapport de couverture en tant qu'artefact
       - name: Upload coverage report

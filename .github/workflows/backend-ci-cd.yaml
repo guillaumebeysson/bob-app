@@ -37,7 +37,7 @@ jobs:
 
       # 6. Tests avec Maven et génération du rapport JaCoCo
       - name: Tests with Maven
-        run: mvn test jacoco:report
+        run: mvn test jacoco:report -Djacoco.outputDirectory=target/site/jacoco
 
       # 7. Construction du package avec Maven sans exécuter les tests
       - name: Build with Maven

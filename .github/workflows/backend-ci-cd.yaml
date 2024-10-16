@@ -66,4 +66,4 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io \
 
       - name: List files in target
-        run: ls -R back/target
+        run: ls -R target

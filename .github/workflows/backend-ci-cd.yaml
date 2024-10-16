@@ -41,7 +41,7 @@ jobs:
       
       - name: Build Spring Boot JAR
         run: |
-          mvn clean package -DskipTests
+          mvn package -DskipTests
 
       # 8. Télécharger le rapport de couverture JaCoCo en tant qu'artefact
       - name: Upload coverage report

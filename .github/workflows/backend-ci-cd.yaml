@@ -1,14 +1,16 @@
-name: Spring Boot => Build only
+name: Spring Boot => Build, Test, SonarCloud, Docker
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
 
   Back-CI:
-    name: Spring Boot CI
+    name: Spring Boot CI/CD
     runs-on: ubuntu-latest
 
     defaults:
@@ -19,38 +21,56 @@ jobs:
       # 1. Checkout du code
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
 
-      # 2. Configurer Java 11 pour le projet Spring Boot
+      # 2. Configurer Java 17 pour le projet Spring Boot
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Compile with Maven
+      # 3. Cache des paquets Maven
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      # 4. Cache des paquets SonarCloud
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      # 5. Compile avec Maven
       - name: Compile with Maven
         run: mvn compile
-      
-      # 4. Tests with Maven
+
+      # 6. Tests avec Maven et génération du rapport JaCoCo
       - name: Tests with Maven
         run: mvn test jacoco:report
 
-      # 5. Build avec Maven
+      # 7. Construction du package avec Maven sans exécuter les tests
       - name: Build with Maven
         run: mvn package -DskipTests=true
 
-      # 6. Télécharger le rapport de couverture Jacoco en tant qu'artefact
+      # 8. Télécharger le rapport de couverture JaCoCo en tant qu'artefact
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: back/target/site/jacoco
-      
-      # 6. Analyse de qualité avec SonarCloud
+
+      # 9. Analyse du code avec SonarCloud
       - name: Analyze code with SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
         run: |
           mvn sonar:sonar \
           -Dsonar.projectKey=guillaumebeysson_bob-app \

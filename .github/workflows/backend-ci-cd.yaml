@@ -57,7 +57,11 @@ jobs:
 
       # 7. Construction du package avec Maven sans exécuter les tests
       - name: Build with Maven
-        run: mvn package -DskipTests=true
+        run: mvn clean install --file pom.xml
+      
+      - name: Build Spring Boot JAR
+        run: |
+          mvn clean package -DskipTests
 
       # 8. Télécharger le rapport de couverture JaCoCo en tant qu'artefact
       - name: Upload coverage report

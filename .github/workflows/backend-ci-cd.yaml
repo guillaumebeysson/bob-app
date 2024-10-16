@@ -63,6 +63,3 @@ jobs:
 
       - name: List files after tests
         run: ls -R target
-
-      - name: List files after tests
-        run: ls -R back/target

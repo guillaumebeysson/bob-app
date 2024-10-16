@@ -60,6 +60,3 @@ jobs:
           -Dsonar.projectKey=guillaumebeysson_bob-app \
           -Dsonar.organization=guillaumebeysson  \
           -Dsonar.host.url=https://sonarcloud.io \
-
-      - name: List files after tests
-        run: ls -R target

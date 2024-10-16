@@ -42,7 +42,22 @@ jobs:
           name: coverage-report
           path: front/coverage/bobapp
 
-      # 6. Build du projet Angular
+      # 6. Analyse du code avec SonarCloud
+      - name: Analyze code with SonarCloud
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+        run: |
+          npx sonar-scanner \
+          -Dsonar.projectKey=guillaumebeysson_bob-app \
+          -Dsonar.organization=guillaumebeysson \
+          -Dsonar.sources=./src \
+          -Dsonar.tests=./src \
+          -Dsonar.typescript.lcov.reportPaths=coverage/bobapp/lcov.info \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
+
+      # 7. Build du projet Angular
       - name: Build Angular app
         run: npm run build
 

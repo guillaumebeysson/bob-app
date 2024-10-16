@@ -64,3 +64,6 @@ jobs:
           -Dsonar.projectKey=guillaumebeysson_bob-app \
           -Dsonar.organization=guillaumebeysson  \
           -Dsonar.host.url=https://sonarcloud.io \
+
+      - name: List files in target
+        run: ls -R back/target

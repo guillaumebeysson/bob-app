@@ -49,7 +49,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
         run: |
           npx sonar-scanner \
-          -Dsonar.projectKey=guillaumebeysson_bob-app-front \
+          -Dsonar.projectKey=guillaumebeysson_bob-app \
           -Dsonar.organization=guillaumebeysson \
           -Dsonar.sources=./src \
           -Dsonar.exclusions=**/*.spec.ts,**/*.html \

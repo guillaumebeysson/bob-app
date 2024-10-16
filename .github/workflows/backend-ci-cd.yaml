@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: target/site/jacoco
+          path: back/target/site/jacoco
 
       # 9. Analyse du code avec SonarCloud
       - name: Analyze code with SonarCloud
@@ -65,5 +65,5 @@ jobs:
           -Dsonar.organization=guillaumebeysson  \
           -Dsonar.host.url=https://sonarcloud.io \
 
-      - name: List files in target
-        run: ls -R target
+      - name: List files after tests
+        run: ls -R back/target

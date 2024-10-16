@@ -31,22 +31,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Cache des paquets Maven
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      # 4. Cache des paquets SonarCloud
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
       # 5. Compile avec Maven
       - name: Compile with Maven
         run: mvn compile
@@ -76,4 +60,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }} 
         run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=guillaumebeysson_bob-app
+          mvn sonar:sonar \
+          -Dsonar.projectKey=guillaumebeysson_bob-app \
+          -Dsonar.organization=guillaumebeysson  \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}

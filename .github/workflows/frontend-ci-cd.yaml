@@ -49,10 +49,12 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
         run: |
           npx sonar-scanner \
-          -Dsonar.projectKey=guillaumebeysson_bob-app \
+          -Dsonar.projectKey=guillaumebeysson_bob-app-front \
           -Dsonar.organization=guillaumebeysson \
           -Dsonar.sources=./src \
+          -Dsonar.exclusions=**/*.spec.ts,**/*.html \
           -Dsonar.tests=./src \
+          -Dsonar.test.inclusions=**/*.spec.ts \
           -Dsonar.typescript.lcov.reportPaths=coverage/bobapp/lcov.info \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}

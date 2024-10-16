@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: back/target/site/jacoco
+          path: target/site/jacoco
 
       # 9. Analyse du code avec SonarCloud
       - name: Analyze code with SonarCloud

@@ -38,10 +38,6 @@ jobs:
       # 6. Tests avec Maven et génération du rapport JaCoCo
       - name: Tests with Maven
         run: mvn test jacoco:report 
-
-      # 7. Construction du package avec Maven sans exécuter les tests
-      - name: Build with Maven
-        run: mvn clean install --file pom.xml
       
       - name: Build Spring Boot JAR
         run: |

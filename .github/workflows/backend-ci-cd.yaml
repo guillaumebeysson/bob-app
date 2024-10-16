@@ -54,5 +54,6 @@ jobs:
         run: |
           mvn sonar:sonar \
           -Dsonar.projectKey=guillaumebeysson_bob-app \
+          -Dsonar.organization=guillaumebeysson  \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}

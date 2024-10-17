@@ -58,9 +58,9 @@
 							<goal>report</goal>
 						</goals>
 						<configuration>
-							<formats>
+							<!-- <formats>
 								<format>XML</format>
-							</formats>				
+							</formats>				 -->
 						</configuration>
 					</execution>
 				</executions>

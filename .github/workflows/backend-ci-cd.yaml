@@ -31,11 +31,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 5. Compile avec Maven
+      # 3. Compile avec Maven
       - name: Compile with Maven
         run: mvn compile
 
-      # 6. Tests avec Maven et génération du rapport JaCoCo
+      # 4. Tests avec Maven et génération du rapport JaCoCo
       - name: Tests with Maven
         run: mvn test jacoco:report 
       
@@ -43,14 +43,14 @@ jobs:
         run: |
           mvn package -DskipTests
 
-      # 8. Télécharger le rapport de couverture JaCoCo en tant qu'artefact
+      # 5. Télécharger le rapport de couverture JaCoCo en tant qu'artefact
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: back/target/site/jacoco
 
-      # 9. Analyse du code avec SonarCloud
+      # 6. Analyse du code avec SonarCloud
       - name: Analyze code with SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -60,3 +60,19 @@ jobs:
           -Dsonar.projectKey=guillaumebeysson_bob-app \
           -Dsonar.organization=guillaumebeysson  \
           -Dsonar.host.url=https://sonarcloud.io \
+
+      # 7. Connexion à Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 8. Construire et envoyer l'image Docker à Docker Hub
+      - name: Build and push Docker image (back)
+        uses: docker/build-push-action@v4
+        with:
+          context: ./back
+          file: ./back/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bobapp-backend:latest

@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+
+  backend:
+    build:
+      context: ./back
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: 
+      context: ./front
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./front/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend

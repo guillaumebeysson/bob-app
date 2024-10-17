@@ -19,6 +19,13 @@ jobs:
       # 1. Checkout du code
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      # 2. Configurer Java 17 pour SonarCloud
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       # 2. Configurer Node.js
       - name: Use Node.js

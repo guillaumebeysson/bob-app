@@ -19,52 +19,30 @@ jobs:
       # 1. Checkout du code
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      # 2. Configurer Java 17 pour SonarCloud
-      # - name: Set up Java
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     distribution: 'temurin'
-      #     java-version: '17'
 
-      # 3. Configurer Node.js
+      # 2. Configurer Node.js
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      # 4. Installer les dépendances
+      # 3. Installer les dépendances
       - name: Install dependencies
         run: npm install
 
-      # 5. Exécuter les tests avec Karma et générer un rapport de couverture
+      # 4. Exécuter les tests avec Karma et générer un rapport de couverture
       - name: Run tests with Karma in CI mode
         run: |
           CI=true npm run test -- --browsers=ChromeHeadless --code-coverage --watch=false
 
-      # 6. Télécharger le rapport de couverture en tant qu'artefact
+      # 5. Télécharger le rapport de couverture en tant qu'artefact
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: front/coverage/bobapp
 
-      # 7. Analyse du code avec SonarCloud
-      # - name: Analyze code with SonarCloud
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
-      #   run: |
-      #     npx sonar-scanner \
-      #     -Dsonar.projectKey=guillaumebeysson_bob-app \
-      #     -Dsonar.organization=guillaumebeysson \
-      #     -Dsonar.sources=./src \
-      #     -Dsonar.exclusions=**/*.spec.ts,**/*.html \
-      #     -Dsonar.tests=./src \
-      #     -Dsonar.test.inclusions=**/*.spec.ts \
-      #     -Dsonar.typescript.lcov.reportPaths=coverage/bobapp/lcov.info \
-      #     -Dsonar.host.url=https://sonarcloud.io \
-
+      # 6. Analyse du code avec SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:
@@ -82,18 +60,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets. SONARCLOUD_TOKEN }}
 
-      # 8. Build du projet Angular
+      # 7. Build du projet Angular
       - name: Build Angular app
         run: npm run build
 
-      # 9. Login to DockerHub
+      # 8. Login to DockerHub
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 10. Build and push Docker image
+      # 9. Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:

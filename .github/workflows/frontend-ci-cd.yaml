@@ -49,6 +49,7 @@ jobs:
           args: >
             -Dsonar.projectKey=guillaumebeysson_bob-app
             -Dsonar.organization=guillaumebeysson
+            -Dsonar.projectName=bob-app-frontend
             -Dsonar.sources=front/src
             -Dsonar.tests=front/src
             -Dsonar.typescript.lcov.reportPaths=front/coverage/bobapp/lcov-report/lcov.info

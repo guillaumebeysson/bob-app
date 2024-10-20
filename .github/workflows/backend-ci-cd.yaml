@@ -61,7 +61,6 @@ jobs:
           -Dsonar.organization=guillaumebeysson  \
           -Dsonar.sources=src/main/java \
           -Dsonar.tests=src/test/java \
-          -Dsonar.branch.name=main \
           -Dsonar.host.url=https://sonarcloud.io \
 
       # 7. Connexion à Docker Hub
@@ -70,7 +69,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
 
       # 8. Construire et envoyer l'image Docker à Docker Hub
       - name: Build and push Docker image (back)

@@ -57,7 +57,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN_BACKEND }} 
         run: |
           mvn sonar:sonar \
-          -Dsonar.projectKey=guillaumebeysson_bob-app \
+          -Dsonar.projectKey=guillaumebeysson_bob-app-backend \
           -Dsonar.organization=guillaumebeysson  \
           -Dsonar.sources=src/main/java \
           -Dsonar.tests=src/test/java \

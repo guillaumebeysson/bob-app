@@ -59,6 +59,8 @@ jobs:
           mvn sonar:sonar \
           -Dsonar.projectKey=guillaumebeysson_bob-app \
           -Dsonar.organization=guillaumebeysson  \
+          -Dsonar.sources=src/main/java \
+          -Dsonar.tests=src/test/java \
           -Dsonar.host.url=https://sonarcloud.io \
 
       # 7. Connexion à Docker Hub

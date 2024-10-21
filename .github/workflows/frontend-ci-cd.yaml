@@ -62,13 +62,14 @@ jobs:
             -Dsonar.ts.tslintconfigpath=tslint.json
             -Dsonar.exclusions=**/node_modules/**,**/assets/**
             -Dsonar.test.inclusions=**/*.spec.ts
+            -X
             
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets. SONARCLOUD_TOKEN }}
 
       - name: List coverage directory
-        run: ls -la coverage/bobapp/lcov-report
+        run: ls -la coverage/bobapp
       
       - name: Search for lcov.info
         run: find coverage -name lcov.info

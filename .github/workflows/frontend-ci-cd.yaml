@@ -11,9 +11,9 @@ jobs:
     name: Angular CI
     runs-on: ubuntu-latest
 
-    # defaults:
-    #   run:
-    #     working-directory: 'front'
+    defaults:
+      run:
+        working-directory: 'front'
 
     steps:
       # 1. Checkout du code

@@ -61,6 +61,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets. SONARCLOUD_TOKEN }}
 
+      - name: Verify lcov report exists
+        run: ls -la front/coverage/bobapp/lcov-report/
+
+
       # 7. Build du projet Angular
       - name: Build Angular app
         run: npm run build

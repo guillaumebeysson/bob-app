@@ -11,9 +11,9 @@ jobs:
     name: Angular CI
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: 'front'
+    # defaults:
+    #   run:
+    #     working-directory: 'front'
 
     steps:
       # 1. Checkout du code
@@ -44,6 +44,9 @@ jobs:
         with:
           name: coverage-report
           path: front/coverage/bobapp
+        
+      - name: List root directory
+        run: ls -la
 
       # 6. Analyse du code avec SonarCloud
       - name: SonarCloud Scan

@@ -56,9 +56,9 @@ jobs:
             -Dsonar.projectKey=guillaumebeysson_bob-app
             -Dsonar.organization=guillaumebeysson
             -Dsonar.projectName=bob-app-frontend
-            -Dsonar.sources=src
-            -Dsonar.tests=src
-            -Dsonar.typescript.lcov.reportPaths=coverage/bobapp/lcov-report/lcov.info
+            -Dsonar.sources=./src
+            -Dsonar.tests=./src
+            -Dsonar.typescript.lcov.reportPaths=./coverage/bobapp/lcov-report/lcov.info
             -Dsonar.ts.tslintconfigpath=tslint.json
             -Dsonar.exclusions=**/node_modules/**,**/assets/**
             -Dsonar.test.inclusions=**/*.spec.ts

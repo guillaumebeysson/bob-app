@@ -45,8 +45,8 @@ jobs:
           name: coverage-report
           path: front/coverage/bobapp
         
-      - name: List root directory
-        run: ls -la
+      - name: List coverage directory
+        run: ls -la front/coverage
 
       # 6. Analyse du code avec SonarCloud
       - name: SonarCloud Scan

@@ -19,9 +19,6 @@ jobs:
       # 1. Checkout du code
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      - name: List root directory after checkout
-        run: ls -la
 
       # 2. Configurer Node.js
       - name: Use Node.js
@@ -44,9 +41,6 @@ jobs:
         with:
           name: coverage-report
           path: front/coverage/bobapp
-        
-      - name: List coverage directory
-        run: ls -la coverage/bobapp
 
       # 6. Analyse du code avec SonarCloud
       - name: SonarCloud Scan
@@ -66,12 +60,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets. SONARCLOUD_TOKEN }}
-
-      - name: List coverage directory
-        run: ls -la coverage/bobapp
-      
-      - name: Search for lcov.info
-        run: find coverage -name lcov.info
 
       # 7. Build du projet Angular
       - name: Build Angular app

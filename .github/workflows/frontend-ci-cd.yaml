@@ -58,11 +58,10 @@ jobs:
             -Dsonar.projectName=bob-app-frontend
             -Dsonar.sources=front/src
             -Dsonar.tests=front/src
-            -Dsonar.typescript.lcov.reportPaths=coverage/bobapp/lcov.info
+            -Dsonar.typescript.lcov.reportPaths=front/coverage/bobapp/lcov.info
             -Dsonar.ts.tslintconfigpath=tslint.json
             -Dsonar.exclusions=**/node_modules/**,**/assets/**
             -Dsonar.test.inclusions=**/*.spec.ts
-            -X
             
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

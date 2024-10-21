@@ -58,7 +58,7 @@ jobs:
             -Dsonar.projectName=bob-app-frontend
             -Dsonar.sources=front/src
             -Dsonar.tests=front/src
-            -Dsonar.typescript.lcov.reportPaths=front/coverage/bobapp/lcov-report/lcov.info
+            -Dsonar.typescript.lcov.reportPaths=coverage/bobapp/lcov-report/lcov.info
             -Dsonar.ts.tslintconfigpath=tslint.json
             -Dsonar.exclusions=**/node_modules/**,**/assets/**
             -Dsonar.test.inclusions=**/*.spec.ts
@@ -69,6 +69,9 @@ jobs:
 
       - name: List coverage directory
         run: ls -la coverage/bobapp/lcov-report
+      
+      - name: Search for lcov.info
+        run: find coverage -name lcov.info
 
       # 7. Build du projet Angular
       - name: Build Angular app
